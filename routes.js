@@ -2,12 +2,12 @@ const express = require("express");
 const app = require('express')();
 const router = express.Router();
 const storieManage = require("./controller/storieManage");
-// const registrations = require("./controller/registrations");
-// const session = require("./controller/session");
+const registrations = require("./controller/registrations");
+const session = require("./controller/session");
 //const middlewares= require('./middlewares');
 
 // ------   registration  -------  //
-// router.post("/register",registrations.create);
+router.post("/register",registrations.create);
 // router.post("/redirect", registrations.redirection);
 // router.get("/oauth", registrations.oauth);
 // router.get("/oauth/callback", registrations.oauthcall);
