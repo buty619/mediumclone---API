@@ -3,13 +3,13 @@ const User = require("../model/User");
 const jwt = require('jsonwebtoken');
 
 exports.create =  async function(req, res, next) {  
-  const auth = req.body.auth;
+  const email = req.body.email;
   const password = req.body.password;
   try {
-    const user = await User.authenticate(auth, password);
+    const user = await User.authenticate(email, password);
     if (user) {
-      console.log("se crea usuario nuevo");
       const token = await jwt.sign({user:user._id},"secret key");
+      console.log("usuario logueado")
       res.json({token});
       res.status(204).send({msg : 'ok log in'});
     } else {

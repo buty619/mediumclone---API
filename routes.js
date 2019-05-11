@@ -14,7 +14,7 @@ router.post("/register",registrations.create);
 
 
 // ------   Session  -------  //
-// router.post("/logIn", session.create);
+router.post("/logIn", session.create);
 // // router.get("/logOut", session.logOut);
 
 // ------   manage -------  //

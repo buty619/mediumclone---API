@@ -4,14 +4,14 @@ var bcrypt = require('bcrypt-nodejs');
 //const fetch = require('node-fetch');
 
 exports.create = (req,res) => { 
-    const hash = bcrypt.hashSync(req.body.password);  
-    User.create({email:req.body.email,password:hash,userImg:"https://s3.us-east-2.amazonaws.com/mediumclonemakeitreal/user.png"}, err => {
-      if(err){
-        return console.log("ocurrio un error: ",err)
-      }
-      console.log("usuario generado");
-    });
-    res.status(204).send({});
+  const hash = bcrypt.hashSync(req.body.password);  
+  User.create({email:req.body.email,password:hash,userImg:"https://s3.us-east-2.amazonaws.com/mediumclonemakeitreal/user.png"}, err => {
+    if(err){
+      return console.log("ocurrio un error: ",err)
+    }
+    console.log("se crea usuario nuevo");
+  });
+  res.status(204).send({});
 }
 
 // exports.redirection = (req,res) => {
