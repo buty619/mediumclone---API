@@ -10,7 +10,7 @@ exports.create =  async function(req, res, next) {
     if (user) {
       const token = await jwt.sign({user:user._id},"secret key");
       console.log("usuario logueado")
-      res.json({token});
+      res.json({token,user:{userId:user._id,name:user.name,email:user.email,userImg:user.userImg}});
       res.status(204).send({msg : 'ok log in'});
     } else {
       res.status(401).send({});
