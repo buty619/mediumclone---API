@@ -5,7 +5,8 @@ var userSchema = mongoose.Schema({
   name:String,
   email: String,
   password:String,
-  userImg:String
+  userImg:String,
+  bio: String
 });
 
 userSchema.statics.authenticate = async (auth, password) => {
