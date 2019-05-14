@@ -4,12 +4,13 @@ const Storie = require("../model/Storie");
 exports.create = async (req,res) => { 
   await Storie.create({text:req.body.text,
                        title:req.body.title,
-                       firstP:req.body.firstP}, (err,res) => {
+                       firstP:req.body.firstP,
+                       userId:req.body.userId}, (err,res) => {
     if(err){
       return console.log("ocurrio un error: ",err)
     }
     idres = res._id;
-    console.log("crea la historia");
+    console.log("crea la historia :" +idres);
   });
   try{
     res.json(idres);

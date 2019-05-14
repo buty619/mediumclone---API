@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const aws = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
+require('dotenv').config()
 
 aws.config.update({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -19,11 +20,10 @@ var upload = multer({
       bucket: process.env.S3_BUCKET_NAME,
       acl: 'public-read',
       contentType: function (req, file, cb) {
-          cb(null, file.mimetype);
+        cb(null, file.mimetype);
       },
       key: function (req, file, cb) {
-          console.log(file);
-          cb(null, Date.now().toString());
+        cb(null, Date.now().toString());
       }
   })
 });
@@ -32,8 +32,8 @@ const singleUpload = upload.single('image');
 
 exports.uploadImg = function(req, res) {  
   singleUpload(req,res, (err) =>{
-      if (err) return console.error(err);
-      return res.json({'imageUrl':req.file.location});
+    if (err) return console.error(err);
+    return res.json({'imageUrl':req.file.location});
   });
 }
 
@@ -63,13 +63,17 @@ exports.create =  async function(req, res, next) {
 exports.update = async (req,res) =>{
   const id = req.body.id;
   const findUser = await  User.findById(id);
-  console.log(findUser);
   findUser.name = req.body.name;
   findUser.bio = req.body.bio;
   findUser.userImg = req.body.userImg;
   try{
-    await findStorie.save({});
+    await findUser.save({});
     console.log("se modifica Usuario")
+    res.json({user:{userId:findUser._id,
+                    name:findUser.name,
+                    email:findUser.email,
+                    userImg:findUser.userImg,
+                    bio:findUser.bio}});
     res.status(204).send({});
   }catch(e){
     return (e);

@@ -15,13 +15,15 @@ router.post("/register",registrations.create);
 
 // ------   Session  -------  //
 router.post("/logIn", session.create);
-// // router.get("/logOut", session.logOut);
+router.post('/uploadUserImg', session.uploadImg);
+router.post('/updateUser', session.update);
+// router.get("/logOut", session.logOut);
 
 // ------   manage -------  //
 router.post('/create', storieManage.create);
 router.post('/update', storieManage.update);
 router.post('/load', storieManage.load);
-router.post('/loadAll', storieManage.loadAll);
+router.get('/loadAll', storieManage.loadAll);
 // router.get("/restaurants",restManage.findAll);
 // router.get("/restaurants/:id", restManage.findOne);
 // router.post("/restaurants", restManage.create);
