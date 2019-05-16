@@ -92,7 +92,3 @@ exports.loadUser = async (req,res) =>{
     return (e);
   }
 }
-
-// exports.logOut = async function(req, res){
-//   req.session = null;
-// }

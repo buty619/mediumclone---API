@@ -55,3 +55,25 @@ exports.loadAll = async (req,res) =>{
     return (e);
   }
 }
+
+exports.loadUserStories = async (req,res) =>{
+  const id = req.body.id;
+  const find = await  Storie.find({"userId":id});
+  console.log("carga las historias del usuario: " + id)
+  try{
+    res.json(find);
+  }catch(e){
+    return (e);
+  }
+}
+
+exports.delete = async (req,res) =>{
+  const id = req.body.id;
+  await  Storie.findOneAndRemove({_id:id});
+  try{
+    console.log("se elimina la historia : " + id);
+    res.status(204).send({});
+  }catch(e){
+    return (e);
+  }
+}

@@ -8,9 +8,6 @@ const session = require("./controller/session");
 
 // ------   registration  -------  //
 router.post("/register",registrations.create);
-// router.post("/redirect", registrations.redirection);
-// router.get("/oauth", registrations.oauth);
-// router.get("/oauth/callback", registrations.oauthcall);
 
 
 // ------   Session  -------  //
@@ -18,17 +15,15 @@ router.post("/logIn", session.create);
 router.post('/uploadImg', session.uploadImg);
 router.post('/updateUser', session.update);
 router.post('/loadUser', session.loadUser);
-// router.get("/logOut", session.logOut);
+
 
 // ------   manage -------  //
 router.post('/create', storieManage.create);
 router.post('/update', storieManage.update);
 router.post('/load', storieManage.load);
 router.get('/loadAll', storieManage.loadAll);
-// router.get("/restaurants",restManage.findAll);
-// router.get("/restaurants/:id", restManage.findOne);
-// router.post("/restaurants", restManage.create);
-// app.patch('/restaurants/:id', controller.update);
-//router.delete('/restaurants/:id', restManage.delete);
+router.post('/loadUserStories', storieManage.loadUserStories);
+router.post('/delete', storieManage.delete);
+
 
 module.exports = router; 
