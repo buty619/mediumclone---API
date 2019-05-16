@@ -5,7 +5,8 @@ var storieSchema = mongoose.Schema({
   firstP: String,
   text: String,
   img: String,
-  userId: String
+  userId: String,
+  publish: Boolean
 });
 
 module.exports = mongoose.model("Storie", storieSchema);

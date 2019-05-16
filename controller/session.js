@@ -33,6 +33,7 @@ const singleUpload = upload.single('image');
 exports.uploadImg = function(req, res) {  
   singleUpload(req,res, (err) =>{
     if (err) return console.error(err);
+    console.log("carga imagen a S3")
     return res.json({'imageUrl':req.file.location});
   });
 }
@@ -50,7 +51,6 @@ exports.create =  async function(req, res, next) {
                             email:user.email,
                             userImg:user.userImg,
                             bio:user.bio}});
-      res.status(204).send({msg : 'ok log in'});
     } else {
       res.status(401).send({});
     }
@@ -74,7 +74,20 @@ exports.update = async (req,res) =>{
                     email:findUser.email,
                     userImg:findUser.userImg,
                     bio:findUser.bio}});
-    res.status(204).send({});
+  }catch(e){
+    return (e);
+  }
+}
+
+exports.loadUser = async (req,res) =>{
+  const id = req.body.id;
+  const findUser = await  User.findById(id);
+  try{
+    await findUser.save({});
+    console.log("se modifica carga el usuario" + id);
+    res.json({user:{name:findUser.name,
+                    userImg:findUser.userImg,
+                    bio:findUser.bio}});
   }catch(e){
     return (e);
   }

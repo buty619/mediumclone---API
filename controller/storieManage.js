@@ -1,32 +1,28 @@
 const mongoose = require("mongoose");
 const Storie = require("../model/Storie");
 
-exports.create = async (req,res) => { 
-  await Storie.create({text:req.body.text,
-                       title:req.body.title,
-                       firstP:req.body.firstP,
-                       userId:req.body.userId}, (err,res) => {
+exports.create = async (req,response) => {
+  await Storie.create({userId:req.body.userId,
+                       publish:false}, (err,res) => {
     if(err){
       return console.log("ocurrio un error: ",err)
     }
-    idres = res._id;
-    console.log("crea la historia :" +idres);
-  });
-  try{
-    res.json(idres);
-    res.status(204).send({});
-  }catch(e){
-    return e
-  }
+      console.log("crea la historia : " +res._id);
+      id = res._id;
+      response.json(id);
+    })
 }
 
 exports.update = async (req,res) =>{
   const id = req.body.id;
+  console.log(id);
   const findStorie = await  Storie.findById(id);
   console.log(findStorie);
   findStorie.title = req.body.title;
   findStorie.firstP = req.body.firstP;
   findStorie.text = req.body.text;
+  findStorie.img = req.body.img;
+  findStorie.publish = req.body.publish;
   try{
     await findStorie.save({});
     console.log("modifica la historia")
@@ -38,9 +34,9 @@ exports.update = async (req,res) =>{
 
 exports.load = async (req,res) =>{
   const id = req.body.id;
-  const findStorie = await  Storie.findById(id);
+  const findStorie = await  Storie.findById(id);  
+  console.log("carga la historia : "+ id)
   console.log(findStorie);
-  console.log("carga una historia")
   try{
     res.json(findStorie);
     res.status(204).send({});
