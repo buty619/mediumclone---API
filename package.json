@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.454.0",
+    "aws-sdk": "^2.814.0",
     "bcrypt-nodejs": "0.0.3",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
